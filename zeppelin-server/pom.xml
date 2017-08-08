@@ -33,7 +33,6 @@
   <name>Zeppelin: Server</name>
 
   <properties>
-
     <!--library versions-->
     <commons.httpclient.version>4.3.6</commons.httpclient.version>
     <jersey.version>2.22.2</jersey.version>
@@ -43,6 +42,9 @@
     <javax.ws.rsapi.version>2.0.1</javax.ws.rsapi.version>
     <libpam4j.version>1.8</libpam4j.version>
     <jna.version>4.1.0</jna.version>
+    <shiro.version>1.4.0</shiro.version>
+    <pac4j.version>1.9.8</pac4j.version>
+    <buji.version>2.2.0</buji.version>
 
     <!--test library versions-->
     <selenium.java.version>2.48.2</selenium.java.version>
@@ -161,6 +163,44 @@
     </dependency>
 
     <dependency>
+      <groupId>io.buji</groupId>
+      <artifactId>buji-pac4j</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.pac4j</groupId>
+      <artifactId>pac4j-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.pac4j</groupId>
+      <artifactId>pac4j-oidc</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-lang3</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!-- OpenId Connect -->
+<!--    <dependency>
+      <groupId>io.buji</groupId>
+      <artifactId>buji-pac4j</artifactId>
+      <version>${buji.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.pac4j</groupId>
+      <artifactId>pac4j-core</artifactId>
+      <version>${pac4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.pac4j</groupId>
+      <artifactId>pac4j-oidc</artifactId>
+      <version>${pac4j.version}</version>
+    </dependency>-->
+
+    <dependency>
       <groupId>org.kohsuke</groupId>
       <artifactId>libpam4j</artifactId>
       <version>${libpam4j.version}</version>
@@ -195,39 +235,38 @@
       <artifactId>websocket-server</artifactId>
       <version>${jetty.version}</version>
     </dependency>
-<!--
-    <dependency>
-      <groupId>org.eclipse.jetty</groupId>
-      <artifactId>jetty-jsp</artifactId>
-      <version>${jetty.version}</version>
-      <exclusions>
-        <exclusion>
+    <!--
+        <dependency>
+          <groupId>org.eclipse.jetty</groupId>
+          <artifactId>jetty-jsp</artifactId>
+          <version>${jetty.version}</version>
+          <exclusions>
+            <exclusion>
+              <groupId>org.eclipse.jetty.orbit</groupId>
+              <artifactId>javax.servlet.jsp</artifactId>
+            </exclusion>
+            <exclusion>
+              <groupId>org.eclipse.jetty.orbit</groupId>
+              <artifactId>javax.servlet</artifactId>
+            </exclusion>
+            <exclusion>
+              <groupId>org.eclipse.jetty.orbit</groupId>
+              <artifactId>org.apache.jasper.glassfish</artifactId>
+            </exclusion>
+          </exclusions>
+        </dependency>
+        <dependency>
           <groupId>org.eclipse.jetty.orbit</groupId>
           <artifactId>javax.servlet.jsp</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.eclipse.jetty.orbit</groupId>
-          <artifactId>javax.servlet</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.eclipse.jetty.orbit</groupId>
-          <artifactId>org.apache.jasper.glassfish</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-
-    <dependency>
-      <groupId>org.eclipse.jetty.orbit</groupId>
-      <artifactId>javax.servlet.jsp</artifactId>
-      <version>2.2.0.v201112011158</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.eclipse.jetty.orbit</groupId>
-          <artifactId>javax.servlet</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
--->
+          <version>2.2.0.v201112011158</version>
+          <exclusions>
+            <exclusion>
+              <groupId>org.eclipse.jetty.orbit</groupId>
+              <artifactId>javax.servlet</artifactId>
+            </exclusion>
+          </exclusions>
+        </dependency>
+    -->
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
@@ -486,7 +525,7 @@
       </activation>
       <properties>
         <zeppelin.daemon.package.base>
-	        ../bin
+          ../bin
         </zeppelin.daemon.package.base>
       </properties>
     </profile>
@@ -498,7 +537,7 @@
       </activation>
       <properties>
         <zeppelin.daemon.package.base>
-	        ../zeppelin-distribution/target/zeppelin-${project.version}/zeppelin-${project.version}/bin
+          ../zeppelin-distribution/target/zeppelin-${project.version}/zeppelin-${project.version}/bin
         </zeppelin.daemon.package.base>
       </properties>
     </profile>

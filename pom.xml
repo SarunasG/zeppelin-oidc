@@ -113,7 +113,10 @@
     <commons.collections.version>3.2.1</commons.collections.version>
     <commons.logging.version>1.1.1</commons.logging.version>
     <commons.cli.version>1.3.1</commons.cli.version>
-    <shiro.version>1.3.2</shiro.version>
+    <shiro.version>1.4.0</shiro.version>
+    <pac4j.version>2.1.0</pac4j.version>
+    <buji.version>3.0.0</buji.version>
+
 
     <!-- test library versions -->
     <junit.version>4.12</junit.version>
@@ -267,6 +270,23 @@
         <groupId>org.apache.shiro</groupId>
         <artifactId>shiro-config-core</artifactId>
         <version>${shiro.version}</version>
+      </dependency>
+
+      <!-- OpenId Connect -->
+      <dependency>
+        <groupId>io.buji</groupId>
+        <artifactId>buji-pac4j</artifactId>
+        <version>${buji.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.pac4j</groupId>
+        <artifactId>pac4j-core</artifactId>
+        <version>${pac4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.pac4j</groupId>
+        <artifactId>pac4j-oidc</artifactId>
+        <version>${pac4j.version}</version>
       </dependency>
 
       <!-- Test libraries -->
@@ -554,25 +574,25 @@
         </configuration>
       </plugin>
 
-    <!--TODO(alex): make part of the build and reconcile conflicts
-    <plugin>
-      <groupId>com.ning.maven.plugins</groupId>
-      <artifactId>maven-duplicate-finder-plugin</artifactId>
-      <version>1.0.4</version>
-      <executions>
-        <execution>
-          <id>default</id>
-          <phase>verify</phase>
-          <goals>
-            <goal>check</goal>
-          </goals>
-       </execution>
-      </executions>
-      <configuration>
-        <failBuildInCaseOfConflict>true</failBuildInCaseOfConflict>
-      </configuration>
-    </plugin>
-    -->
+      <!--TODO(alex): make part of the build and reconcile conflicts
+      <plugin>
+        <groupId>com.ning.maven.plugins</groupId>
+        <artifactId>maven-duplicate-finder-plugin</artifactId>
+        <version>1.0.4</version>
+        <executions>
+          <execution>
+            <id>default</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+         </execution>
+        </executions>
+        <configuration>
+          <failBuildInCaseOfConflict>true</failBuildInCaseOfConflict>
+        </configuration>
+      </plugin>
+      -->
     </plugins>
 
     <pluginManagement>
@@ -927,174 +947,174 @@
       </activation>
       <build>
         <plugins>
-        <plugin>
-          <groupId>org.apache.rat</groupId>
-          <artifactId>apache-rat-plugin</artifactId>
-          <version>0.11</version>
-          <configuration>
-            <excludes>
-              <exclude>**/*.keywords</exclude>
-              <exclude>reports/**</exclude>
-              <exclude>**/.idea/</exclude>
-              <exclude>**/*.iml</exclude>
-              <exclude>.git/</exclude>
-              <exclude>.github/*</exclude>
-              <exclude>.gitignore</exclude>
-              <exclude>.repository/</exclude>
-              <exclude>.rat-excludes/</exclude>
-              <exclude>.Rhistory</exclude>
-              <exclude>**/*.diff</exclude>
-              <exclude>**/*.patch</exclude>
-              <exclude>**/*.avsc</exclude>
-              <exclude>**/*.avro</exclude>
-              <exclude>**/*.log</exclude>
-              <exclude>**/test/resources/**</exclude>
-              <exclude>**/.settings/*</exclude>
-              <exclude>**/.classpath</exclude>
-              <exclude>**/.project</exclude>
-              <exclude>**/target/**</exclude>
-              <exclude>**/derby.log</exclude>
-              <exclude>**/metastore_db/</exclude>
-              <exclude>**/logs/**</exclude>
-              <exclude>**/run/**</exclude>
-              <exclude>**/interpreter/**</exclude>
-              <exclude>**/local-repo/**</exclude>
-              <exclude>**/null/**</exclude>
-              <exclude>**/notebook/**</exclude>
-              <exclude>_tools/site/css/*</exclude>
-              <exclude>_tools/maven-4.0.0.xsd</exclude>
-              <exclude>**/README.md</exclude>
-              <exclude>DEPENDENCIES</exclude>
-              <exclude>DEPLOY.md</exclude>
-              <exclude>STYLE.md</exclude>
-              <exclude>Roadmap.md</exclude>
-              <exclude>**/licenses/**</exclude>
-              <exclude>**/zeppelin-distribution/src/bin_license/**</exclude>
-              <exclude>conf/interpreter.json</exclude>
-              <exclude>conf/notebook-authorization.json</exclude>
-              <exclude>conf/credentials.json</exclude>
-              <exclude>conf/zeppelin-env.sh</exclude>
-              <exclude>conf/helium.json</exclude>
-              <exclude>spark-*-bin*/**</exclude>
-              <exclude>.spark-dist/**</exclude>
-              <exclude>**/interpreter-setting.json</exclude>
-              <exclude>**/constants.json</exclude>
-              <exclude>scripts/**</exclude>
-              <exclude>**/**/*.log</exclude>
-              <exclude>**/**/logs/**</exclude>
+          <plugin>
+            <groupId>org.apache.rat</groupId>
+            <artifactId>apache-rat-plugin</artifactId>
+            <version>0.11</version>
+            <configuration>
+              <excludes>
+                <exclude>**/*.keywords</exclude>
+                <exclude>reports/**</exclude>
+                <exclude>**/.idea/</exclude>
+                <exclude>**/*.iml</exclude>
+                <exclude>.git/</exclude>
+                <exclude>.github/*</exclude>
+                <exclude>.gitignore</exclude>
+                <exclude>.repository/</exclude>
+                <exclude>.rat-excludes/</exclude>
+                <exclude>.Rhistory</exclude>
+                <exclude>**/*.diff</exclude>
+                <exclude>**/*.patch</exclude>
+                <exclude>**/*.avsc</exclude>
+                <exclude>**/*.avro</exclude>
+                <exclude>**/*.log</exclude>
+                <exclude>**/test/resources/**</exclude>
+                <exclude>**/.settings/*</exclude>
+                <exclude>**/.classpath</exclude>
+                <exclude>**/.project</exclude>
+                <exclude>**/target/**</exclude>
+                <exclude>**/derby.log</exclude>
+                <exclude>**/metastore_db/</exclude>
+                <exclude>**/logs/**</exclude>
+                <exclude>**/run/**</exclude>
+                <exclude>**/interpreter/**</exclude>
+                <exclude>**/local-repo/**</exclude>
+                <exclude>**/null/**</exclude>
+                <exclude>**/notebook/**</exclude>
+                <exclude>_tools/site/css/*</exclude>
+                <exclude>_tools/maven-4.0.0.xsd</exclude>
+                <exclude>**/README.md</exclude>
+                <exclude>DEPENDENCIES</exclude>
+                <exclude>DEPLOY.md</exclude>
+                <exclude>STYLE.md</exclude>
+                <exclude>Roadmap.md</exclude>
+                <exclude>**/licenses/**</exclude>
+                <exclude>**/zeppelin-distribution/src/bin_license/**</exclude>
+                <exclude>conf/interpreter.json</exclude>
+                <exclude>conf/notebook-authorization.json</exclude>
+                <exclude>conf/credentials.json</exclude>
+                <exclude>conf/zeppelin-env.sh</exclude>
+                <exclude>conf/helium.json</exclude>
+                <exclude>spark-*-bin*/**</exclude>
+                <exclude>.spark-dist/**</exclude>
+                <exclude>**/interpreter-setting.json</exclude>
+                <exclude>**/constants.json</exclude>
+                <exclude>scripts/**</exclude>
+                <exclude>**/**/*.log</exclude>
+                <exclude>**/**/logs/**</exclude>
 
-              <!-- bundled from zeppelin-web -->
-              <exclude>**/test/karma.conf.js</exclude>
-              <exclude>**/test/spec/**</exclude>
-              <exclude>**/.babelrc</exclude>
-              <exclude>**/.bowerrc</exclude>
-              <exclude>.editorconfig</exclude>
-              <exclude>.eslintrc</exclude>
-              <exclude>protractor.conf.js</exclude>
-              <exclude>**/.tmp/**</exclude>
-              <exclude>**/target/**</exclude>
-              <exclude>**/node/**</exclude>
-              <exclude>**/node_modules/**</exclude>
-              <exclude>**/bower_components/**</exclude>
-              <exclude>**/dist/**</exclude>
-              <exclude>**/.buildignore</exclude>
-              <exclude>**/.npmignore</exclude>
-              <exclude>**/.jshintrc</exclude>
-              <exclude>**/yarn.lock</exclude>
-              <exclude>**/bower.json</exclude>
-              <exclude>**/src/fonts/Patua-One*</exclude>
-              <exclude>**/src/fonts/patua-one*</exclude>
-              <exclude>**/src/fonts/Roboto*</exclude>
-              <exclude>**/src/fonts/roboto*</exclude>
-              <exclude>**/src/fonts/fontawesome*</exclude>
-              <exclude>**/src/fonts/font-awesome*</exclude>
-              <exclude>**/src/styles/font-awesome*</exclude>
-              <exclude>**/src/fonts/Simple-Line*</exclude>
-              <exclude>**/src/fonts/simple-line*</exclude>
-              <exclude>**/src/fonts/Source-Code-Pro*</exclude>
-              <exclude>**/src/fonts/source-code-pro*</exclude>
-              <exclude>**/src/**/**.test.js</exclude>
-              <exclude>**/e2e/**/**.spec.js</exclude>
+                <!-- bundled from zeppelin-web -->
+                <exclude>**/test/karma.conf.js</exclude>
+                <exclude>**/test/spec/**</exclude>
+                <exclude>**/.babelrc</exclude>
+                <exclude>**/.bowerrc</exclude>
+                <exclude>.editorconfig</exclude>
+                <exclude>.eslintrc</exclude>
+                <exclude>protractor.conf.js</exclude>
+                <exclude>**/.tmp/**</exclude>
+                <exclude>**/target/**</exclude>
+                <exclude>**/node/**</exclude>
+                <exclude>**/node_modules/**</exclude>
+                <exclude>**/bower_components/**</exclude>
+                <exclude>**/dist/**</exclude>
+                <exclude>**/.buildignore</exclude>
+                <exclude>**/.npmignore</exclude>
+                <exclude>**/.jshintrc</exclude>
+                <exclude>**/yarn.lock</exclude>
+                <exclude>**/bower.json</exclude>
+                <exclude>**/src/fonts/Patua-One*</exclude>
+                <exclude>**/src/fonts/patua-one*</exclude>
+                <exclude>**/src/fonts/Roboto*</exclude>
+                <exclude>**/src/fonts/roboto*</exclude>
+                <exclude>**/src/fonts/fontawesome*</exclude>
+                <exclude>**/src/fonts/font-awesome*</exclude>
+                <exclude>**/src/styles/font-awesome*</exclude>
+                <exclude>**/src/fonts/Simple-Line*</exclude>
+                <exclude>**/src/fonts/simple-line*</exclude>
+                <exclude>**/src/fonts/Source-Code-Pro*</exclude>
+                <exclude>**/src/fonts/source-code-pro*</exclude>
+                <exclude>**/src/**/**.test.js</exclude>
+                <exclude>**/e2e/**/**.spec.js</exclude>
 
-              <!-- from SQLLine 1.0.2, see ZEPPELIN-2135 -->
-              <exclude>**/src/main/java/org/apache/zeppelin/jdbc/SqlCompleter.java</exclude>
+                <!-- from SQLLine 1.0.2, see ZEPPELIN-2135 -->
+                <exclude>**/src/main/java/org/apache/zeppelin/jdbc/SqlCompleter.java</exclude>
 
-              <!-- bundled from bootstrap -->
-              <exclude>docs/assets/themes/zeppelin/bootstrap/**</exclude>
-              <exclude>docs/assets/themes/zeppelin/css/style.css</exclude>
-              <exclude>docs/assets/themes/zeppelin/js/docs.js</exclude>
-              <exclude>docs/assets/themes/zeppelin/js/search.js</exclude>
-              <exclude>docs/_includes/themes/zeppelin/_jumbotron.html</exclude>
-              <exclude>docs/_includes/themes/zeppelin/_navigation.html</exclude>
+                <!-- bundled from bootstrap -->
+                <exclude>docs/assets/themes/zeppelin/bootstrap/**</exclude>
+                <exclude>docs/assets/themes/zeppelin/css/style.css</exclude>
+                <exclude>docs/assets/themes/zeppelin/js/docs.js</exclude>
+                <exclude>docs/assets/themes/zeppelin/js/search.js</exclude>
+                <exclude>docs/_includes/themes/zeppelin/_jumbotron.html</exclude>
+                <exclude>docs/_includes/themes/zeppelin/_navigation.html</exclude>
 
-              <!-- bundled from jekyll-bootstrap -->
-              <exclude>docs/404.html</exclude>
-              <exclude>docs/_config.yml</exclude>
-              <exclude>docs/_includes/JB/**</exclude>
-              <exclude>docs/_layouts/**</exclude>
-              <exclude>docs/_plugins/**</exclude>
-              <exclude>docs/atom.xml</exclude>
-              <exclude>docs/_includes/themes/zeppelin/default.html</exclude>
-              <exclude>docs/_includes/themes/zeppelin/page.html</exclude>
-              <exclude>docs/_includes/themes/zeppelin/post.html</exclude>
-              <exclude>docs/_includes/themes/zeppelin/settings.yml</exclude>
-              <exclude>docs/Rakefile</exclude>
-              <exclude>docs/rss.xml</exclude>
-              <exclude>docs/sitemap.txt</exclude>
-              <exclude>docs/search_data.json</exclude>
-              <exclude>**/dependency-reduced-pom.xml</exclude>
+                <!-- bundled from jekyll-bootstrap -->
+                <exclude>docs/404.html</exclude>
+                <exclude>docs/_config.yml</exclude>
+                <exclude>docs/_includes/JB/**</exclude>
+                <exclude>docs/_layouts/**</exclude>
+                <exclude>docs/_plugins/**</exclude>
+                <exclude>docs/atom.xml</exclude>
+                <exclude>docs/_includes/themes/zeppelin/default.html</exclude>
+                <exclude>docs/_includes/themes/zeppelin/page.html</exclude>
+                <exclude>docs/_includes/themes/zeppelin/post.html</exclude>
+                <exclude>docs/_includes/themes/zeppelin/settings.yml</exclude>
+                <exclude>docs/Rakefile</exclude>
+                <exclude>docs/rss.xml</exclude>
+                <exclude>docs/sitemap.txt</exclude>
+                <exclude>docs/search_data.json</exclude>
+                <exclude>**/dependency-reduced-pom.xml</exclude>
 
-              <!-- bundled from anchor -->
-              <exclude>docs/assets/themes/zeppelin/js/anchor.min.js</exclude>
+                <!-- bundled from anchor -->
+                <exclude>docs/assets/themes/zeppelin/js/anchor.min.js</exclude>
 
-              <!-- bundled from toc -->
-              <exclude>docs/assets/themes/zeppelin/js/toc.js</exclude>
+                <!-- bundled from toc -->
+                <exclude>docs/assets/themes/zeppelin/js/toc.js</exclude>
 
-              <!-- bundled from lunrjs -->
-              <exclude>docs/assets/themes/zeppelin/js/lunr.min.js</exclude>
+                <!-- bundled from lunrjs -->
+                <exclude>docs/assets/themes/zeppelin/js/lunr.min.js</exclude>
 
-              <!-- bundled from jekyll -->
-              <exclude>docs/assets/themes/zeppelin/css/syntax.css</exclude>
+                <!-- bundled from jekyll -->
+                <exclude>docs/assets/themes/zeppelin/css/syntax.css</exclude>
 
-              <!-- docs (website) build target dir -->
-              <exclude>docs/_site/**</exclude>
-              <exclude>docs/Gemfile.lock</exclude>
+                <!-- docs (website) build target dir -->
+                <exclude>docs/_site/**</exclude>
+                <exclude>docs/Gemfile.lock</exclude>
 
-              <!-- package.json -->
-              <exclude>**/package.json</exclude>
+                <!-- package.json -->
+                <exclude>**/package.json</exclude>
 
-              <!-- compiled R packages (binaries) -->
-              <exclude>**/R/lib/**</exclude>
-              <exclude>**/r/lib/**</exclude>
+                <!-- compiled R packages (binaries) -->
+                <exclude>**/R/lib/**</exclude>
+                <exclude>**/r/lib/**</exclude>
 
-               <!--R-related files with alternative licenses-->
+                <!--R-related files with alternative licenses-->
 
-              <exclude>**/R/rzeppelin/R/globals.R</exclude>
-              <exclude>**/R/rzeppelin/R/common.R</exclude>
-              <exclude>**/R/rzeppelin/R/protocol.R</exclude>
-              <exclude>**/R/rzeppelin/R/rServer.R</exclude>
-              <exclude>**/R/rzeppelin/R/scalaInterpreter.R</exclude>
-              <exclude>**/R/rzeppelin/R/zzz.R</exclude>
-              <exclude>**/src/main/scala/scala/Console.scala</exclude>
-              <exclude>**/src/main/scala/org/apache/zeppelin/rinterpreter/rscala/Package.scala</exclude>
-              <exclude>**/src/main/scala/org/apache/zeppelin/rinterpreter/rscala/RClient.scala</exclude>
+                <exclude>**/R/rzeppelin/R/globals.R</exclude>
+                <exclude>**/R/rzeppelin/R/common.R</exclude>
+                <exclude>**/R/rzeppelin/R/protocol.R</exclude>
+                <exclude>**/R/rzeppelin/R/rServer.R</exclude>
+                <exclude>**/R/rzeppelin/R/scalaInterpreter.R</exclude>
+                <exclude>**/R/rzeppelin/R/zzz.R</exclude>
+                <exclude>**/src/main/scala/scala/Console.scala</exclude>
+                <exclude>**/src/main/scala/org/apache/zeppelin/rinterpreter/rscala/Package.scala</exclude>
+                <exclude>**/src/main/scala/org/apache/zeppelin/rinterpreter/rscala/RClient.scala</exclude>
 
-               <!--The following files are mechanical-->
-              <exclude>**/R/rzeppelin/DESCRIPTION</exclude>
-              <exclude>**/R/rzeppelin/NAMESPACE</exclude>
-            </excludes>
-          </configuration>
+                <!--The following files are mechanical-->
+                <exclude>**/R/rzeppelin/DESCRIPTION</exclude>
+                <exclude>**/R/rzeppelin/NAMESPACE</exclude>
+              </excludes>
+            </configuration>
 
-          <executions>
-            <execution>
-              <id>verify.rat</id>
-              <phase>verify</phase>
-              <goals>
-                <goal>check</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
+            <executions>
+              <execution>
+                <id>verify.rat</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
         </plugins>
       </build>
     </profile>
