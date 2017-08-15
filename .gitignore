@@ -18,6 +18,8 @@ spark-1.*-bin-hadoop*
 
 lens/lens-cli-hist.log
 
+#docker
+scripts/docker/zeppelin/bin/*-SNAPSHOT.tar.gz
 
 # conf file
 conf/zeppelin-env.sh

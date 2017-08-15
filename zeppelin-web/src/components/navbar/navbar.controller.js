@@ -104,6 +104,9 @@ function NavCtrl ($scope, $rootScope, $http, $routeParams, $location,
         setTimeout(function () {
           window.location = baseUrlSrv.getBase()
         }, 1000)
+        $scope.ticket.principal = ''
+        $scope.ticket.ticket = ''
+        document.cookies.deleteAllCookies()
       })
     })
   }

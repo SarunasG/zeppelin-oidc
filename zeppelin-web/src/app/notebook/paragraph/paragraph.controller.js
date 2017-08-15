@@ -1037,7 +1037,8 @@ function ParagraphCtrl ($scope, $rootScope, $route, $window, $routeParams, $loca
     const durationFormat = moment.duration((timeMs / 1000), 'seconds').format('h [hrs] m [min] s [sec]')
     const endFormat = moment(pdata.dateFinished).format('MMMM DD YYYY, h:mm:ss A')
 
-    let user = (pdata.user === undefined || pdata.user === null) ? 'anonymous' : pdata.user
+    let re = ', name=(.*?),'
+    let user = (pdata.user === undefined || pdata.user === null) ? 'anonymous' : pdata.user.match(re)[1]
     let desc = `Took ${durationFormat}. Last updated by ${user} at ${endFormat}.`
 
     if ($scope.isResultOutdated(pdata)) { desc += ' (outdated)' }
