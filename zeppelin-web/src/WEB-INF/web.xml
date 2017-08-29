@@ -21,21 +21,22 @@
 	version="3.0">
 
  <display-name>zeppelin-web</display-name>
-	<servlet>
-		<servlet-name>default</servlet-name>
+
+  <servlet>
+    <servlet-name>default</servlet-name>
     <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
     <init-param>
       <param-name>jersey.config.server.provider.packages</param-name>
       <param-value>org.apache.zeppelin.rest</param-value>
     </init-param>
 
-		<load-on-startup>1</load-on-startup>
-	</servlet>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
 
-	<context-param>
-		<param-name>configuration</param-name>
-		<param-value>deployment</param-value>
-	</context-param>
+  <context-param>
+    <param-name>configuration</param-name>
+    <param-value>deployment</param-value>
+  </context-param>
 
   <session-config>
     <cookie-config>
@@ -43,4 +44,84 @@
       <secure>true</secure>
     </cookie-config>
   </session-config>
+
+  <listener>
+    <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
+  </listener>
+
+
+  <filter>
+    <filter-name>ShiroFilter</filter-name>
+    <filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>ShiroFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+  </filter-mapping>
+
+
+ <!-- <filter>
+    <filter-name>OidcFilter</filter-name>
+    <filter-class>io.buji.pac4j.filter.SecurityFilter</filter-class>
+    <init-param>
+      <param-name>authorizers</param-name>
+      <param-value>securityHeaders</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>OidcFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>logoutFilter</filter-name>
+    <filter-class>io.buji.pac4j.filter.LogoutFilter</filter-class>
+    <init-param>
+      <param-name>defaultUrl</param-name>
+      <param-value>http://localhost:8082</param-value>
+    </init-param>
+    <init-param>
+      <param-name>destroySession</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>logoutFilter</filter-name>
+    <url-pattern>/api/logout/logout</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>centralLogoutFilter</filter-name>
+    <filter-class>io.buji.pac4j.filter.LogoutFilter</filter-class>
+    <init-param>
+      <param-name>defaultUrl</param-name>
+      <param-value>http://localhost:8082/?defaulturlafterlogoutafteridp</param-value>
+    </init-param>
+    <init-param>
+      <param-name>localLogout</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <init-param>
+      <param-name>centralLogout</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <init-param>
+      <param-name>logoutUrlPattern</param-name>
+      <param-value>http://localhost:8082/.*</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>centralLogoutFilter</filter-name>
+    <url-pattern>/api/logout/logout</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+-->
+
 </web-app>

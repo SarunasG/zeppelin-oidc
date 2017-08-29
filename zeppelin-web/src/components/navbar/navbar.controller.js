@@ -86,13 +86,11 @@ function NavCtrl ($scope, $rootScope, $http, $routeParams, $location,
   }
 
   function logout () {
-    let logoutURL = baseUrlSrv.getRestApiBase() + '/login/logout'
-
+    let logoutURL = baseUrlSrv.getRestApiBase() + '/logout/logout?url=' + baseUrlSrv.getBase()
     // for firefox and safari
-    logoutURL = logoutURL.replace('//', '//false:false@')
-    $http.post(logoutURL).error(function () {
-      // force authcBasic (if configured) to logout
-      $http.post(logoutURL).error(function () {
+    // logoutURL = logoutURL.replace('//', '//false:false@')
+    $http.get(logoutURL).success(
+      function (data, status, headers, config) {
         $rootScope.userName = ''
         $rootScope.ticket.principal = ''
         $rootScope.ticket.screenUsername = ''
@@ -101,14 +99,30 @@ function NavCtrl ($scope, $rootScope, $http, $routeParams, $location,
         BootstrapDialog.show({
           message: 'Logout Success'
         })
-        setTimeout(function () {
-          window.location = baseUrlSrv.getBase()
-        }, 1000)
-        $scope.ticket.principal = ''
-        $scope.ticket.ticket = ''
-        document.cookies.deleteAllCookies()
+        // setTimeout(function () {
+        //   window.location = baseUrlSrv.getBase()
+        // }, 1000)
+      }).error(function (err) {
+      // force authcBasic (if configured) to logout
+        $http.get(logoutURL).error(function () {
+          BootstrapDialog.show({
+            message: err
+          })
+          callLogoutFunction()
+          setTimeout(function () {
+            window.location = baseUrlSrv.getBase()
+          }, 1000)
+        })
       })
-    })
+  }
+
+  function callLogoutFunction () {
+    let xmlHttp = new XMLHttpRequest()
+    // xmlHttp.open('GET', 'http://localhost:8082/api/logout/logout?url=http://localhost:8082/', true)// false for synchronous request
+    xmlHttp.open('GET', 'http://localhost:8080/auth/realms/demo/protocol/openid-connect/logout', true)
+    // xmlHttp.setRequestHeader('Cookie', $rootScope.getCookie('PLAY_SESSION'));
+    xmlHttp.send(null)
+    // return xmlHttp.responseText
   }
 
   function search (searchTerm) {

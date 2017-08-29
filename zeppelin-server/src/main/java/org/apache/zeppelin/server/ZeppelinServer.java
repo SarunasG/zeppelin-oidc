@@ -47,6 +47,7 @@ import org.apache.zeppelin.rest.CredentialRestApi;
 import org.apache.zeppelin.rest.HeliumRestApi;
 import org.apache.zeppelin.rest.InterpreterRestApi;
 import org.apache.zeppelin.rest.LoginRestApi;
+import org.apache.zeppelin.rest.LogoutRestApi;
 import org.apache.zeppelin.rest.NotebookRepoRestApi;
 import org.apache.zeppelin.rest.NotebookRestApi;
 import org.apache.zeppelin.rest.SecurityRestApi;
@@ -404,6 +405,9 @@ public class ZeppelinServer extends Application {
 
     LoginRestApi loginRestApi = new LoginRestApi();
     singletons.add(loginRestApi);
+
+    LogoutRestApi logoutRestApi = new LogoutRestApi();
+    singletons.add(logoutRestApi);
 
     ConfigurationsRestApi settingsApi = new ConfigurationsRestApi(notebook);
     singletons.add(settingsApi);
