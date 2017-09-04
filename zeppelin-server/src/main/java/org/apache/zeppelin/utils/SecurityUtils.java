@@ -20,6 +20,7 @@ import java.net.InetAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
+import java.security.Principal;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -31,6 +32,7 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.realm.text.IniRealm;
 import org.apache.shiro.subject.Subject;
+import io.buji.pac4j.subject.Pac4jPrincipal;
 import org.apache.shiro.util.ThreadContext;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.zeppelin.conf.ZeppelinConfiguration;
@@ -51,7 +53,7 @@ public class SecurityUtils {
   private static final HashSet<String> EMPTY_HASHSET = Sets.newHashSet();
   private static boolean isEnabled = false;
   private static final Logger log = LoggerFactory.getLogger(SecurityUtils.class);
-  
+
   public static void setIsEnabled(boolean value) {
     isEnabled = value;
   }
@@ -88,9 +90,22 @@ public class SecurityUtils {
 
     String principal;
     if (subject.isAuthenticated()) {
-      principal = subject.getPrincipal().toString();
+      principal = extractPrincipal(subject);
     } else {
       principal = ANONYMOUS;
+    }
+    return principal;
+  }
+
+  private static String extractPrincipal(Subject subject) {
+    String principal;
+    Object principalObject = subject.getPrincipal();
+    if (principalObject instanceof Pac4jPrincipal) {
+      principal = ((Pac4jPrincipal) principalObject).getProfile().getAttribute("name").toString();
+    }  else if (principalObject instanceof Principal) {
+      principal = ((Principal) principalObject).getName();
+    }  else {
+      principal = String.valueOf(principalObject);
     }
     return principal;
   }

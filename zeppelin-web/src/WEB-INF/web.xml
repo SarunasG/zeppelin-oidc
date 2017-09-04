@@ -50,7 +50,7 @@
   </listener>
 
 
-  <filter>
+<!--  <filter>
     <filter-name>ShiroFilter</filter-name>
     <filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class>
   </filter>
@@ -62,7 +62,7 @@
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>
     <dispatcher>ERROR</dispatcher>
-  </filter-mapping>
+  </filter-mapping>-->
 
 
  <!-- <filter>
