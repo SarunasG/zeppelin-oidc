@@ -80,7 +80,7 @@ public class CorsFilter implements Filter {
     DateFormat fullDateFormatEN =
         DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL, new Locale("EN", "en"));
     response.addHeader("Date", fullDateFormatEN.format(new Date()));
-    response.addHeader("X-FRAME-OPTIONS", ZeppelinConfiguration.create().getXFrameOptions());
+    //response.addHeader("X-FRAME-OPTIONS", ZeppelinConfiguration.create().getXFrameOptions());
   }
 
   @Override
